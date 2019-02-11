@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Themes on Mostly Information (theory)</title>
+    <link>jonnydedwards.github.io/tags/themes/</link>
+    <description>Recent content in Themes on Mostly Information (theory)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <lastBuildDate>Wed, 02 Apr 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="jonnydedwards.github.io/tags/themes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>(Hu)go Template Primer</title>
+      <link>jonnydedwards.github.io/post/dlmlai/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>jonnydedwards.github.io/post/dlmlai/</guid>
+      <description>The whole ML/AI/Deep Learning thing After reading StJohn Deakin&amp;rsquo;s excellent take on all things AI, I wanted to get down where I stand on the whole thing!
+Deep Learning  Only suits certain large data problems (vision/speech). Only suits problems where manipulation of non-platonic concepts prevail (no symbolic reality&amp;hellip; although some work has been done on this). Largely empirical (other than when Bayes is applied). This gung-ho is refreshing. Researchers it attracts are low grade scientists (like me), compared to, say, biologists.</description>
+    </item>
+    
+  </channel>
+</rss>
