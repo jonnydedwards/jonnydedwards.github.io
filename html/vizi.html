@@ -1,0 +1,200 @@
+<html>
+<head>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="https://latex.now.sh/style.css"> 
+</head>
+
+<body id="top">
+  <header>
+    <h1>Starting With the VIZI-AI</h1>
+    <p class="author">Jonny Edwards  <br> May 2020</p>
+  </header>
+  
+<div class="abstract">
+  <h5>Abstract</h5>
+  <p>Getting Started with the VIZI - from a developers perspective.</p>
+</div>
+
+
+<h2> Unboxing and Bootup </h2>
+
+<h3> Initial setup </h3>
+
+<p> My view of this device is it fits nicely as an 
+accelerated SBC style device, with this 
+in mind initial attempts were to make it useful 
+as a standalone. The preliminary goals were </p>
+
+<ol>
+<li> Make the systems useful as a functioning SBC </li>
+<li> See if I could get a video camera working </li>
+<li> Try to get a rudimentary Neural Model working with the movidius </li>
+</ol>
+
+<h2> Making it useful </h2>
+
+<p >First off, logging in (root:root),  
+plug the network network in and try it out via pinging somewhere 
+(I’m not sure where 7.7.7.7 is but it’s become a habit!) and 
+then do an update </p>
+
+<pre>
+ping 7.7.7.7
+sudo apt update
+sudo apt upgrade
+</pre>
+
+<p> Next steps, set up the windowing environment, you’ll need to also 
+setup a new user as once this reboots you’ll need the identity. 
+I chose <a href="https://github.com/lxqt">LXQT</a> 
+since it’s lightweight (it’s the window manager 
+of <a href="https://lubuntu.net/">Lubuntu</a>) 
+but looks professional and clean.
+
+Add a user </p> 
+
+<pre>
+adduser jonny
+</pre>
+
+<p> Add a windowing environment </p>
+
+<pre>
+apt-get install lxqt
+</pre>
+
+<p> Restart </p>
+
+<pre>
+shutdown -r now
+</pre>
+
+You should arrive at a screen that looks like this
+
+<figure>
+        <img src="../images/1.jpg" loading="lazy" alt="Mountain landscape" width="600" height="400">
+</figure>
+
+
+<p> Login to your icon and you should arrive into the standard LXQT 
+windowing environment </p>
+
+<figure>
+        <img src="../images/2.jpg" loading="lazy" alt="Mountain landscape" width="600" height="400">
+</figure>
+
+
+<h2>Installing build tools </h2>
+
+<p> The things you need to get things rolling in modern time are 
+Git and build tools, you will need to setup sudo access 
+(edit  as per). I’ve also installed 
+<a href="https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh"> Anaconda </a> 
+python in view of the fact that we might be doing some ML type activity. I have a few things 
+that make life easier, such as a nice terminal </p> 
+
+<p> git: </p>
+<pre>
+sudo apt install git 
+</pre>
+
+<p> gcc etc </p>
+
+<pre>
+sudo apt install build-essential gcc
+</pre>
+
+<p> Download Ananconda and install </p>
+
+<pre>
+chmod +x Anaconda3-2020.02-Linux-x86_64.sh 
+ ./Anaconda3-2020.02-Linux-x86_64.sh
+</pre>
+
+<p> Add a simple simple terminal manager as qterminal feels a bit clunky </p>
+
+
+<pre>
+sudo apt install stterm
+</pre>
+
+<p> Add micro - it’s lightweight and not vim or emacs </p>
+
+<pre>
+curl https://getmic.ro | bash
+</pre>
+
+<p> Add htop to monitor stuff and chromium as a basic web browser </p> 
+
+<pre>
+sudo apt install htop
+sudo apt install chromium
+</pre>
+
+<p> Next Checkout  the webcam, I’ve got a microsoft USB camera 
+that has worked with many versions of ubuntu, I always try cheese 
+first as it handles the video device drivers. I also tried whereby.com 
+on chromium 
+
+<pre>
+sudo apt install cheese
+</pre>
+
+<p> Fire it up from the menu and you’ll see yourself - a good start 
+for sensors given that the movidius is primarily there to accelerate 
+in the case of machine vision problems </p>
+
+<figure>
+        <img src="../images/3.jpg" loading="lazy" alt="Mountain landscape" width="600" height="400">
+</figure>
+
+
+<h2> Installing WIFI </h2>
+
+<p> For a variety of reasons I ended up needing a wifi connection, 
+I choose a TP-LINK dongle, which I’m not sure is the easiest route, 
+the install is standard device base kernel update, but you need to 
+make sure you pull in both the linux source and header files </p>
+
+<pre>
+cd rtl8192EU_WiFi_linux_v5.2.19.1_25633.20171222_COEX20171113-0047.zip 
+unzip rtl8192EU_WiFi_linux_v5.2.19.1_25633.20171222_COEX20171113-0047.zip 
+cd rtl8192EU_WiFi_linux_v5.2.19.1_25633.20171222_COEX20171113-0047
+</pre>
+
+<p> and then: </p>
+
+<pre>
+sudo apt install linux-source-4.9
+sudo apt install linux-headers-4.9
+make 
+sudo cp 8192eu.ko /lib/modules/4.9.0-12-amd64/kernel/drivers/wireless/
+sudo mkdir /lib/modules/4.9.0-12-amd64/kernel/drivers/wireless/
+sudo cp 8192eu.ko /lib/modules/4.9.0-12-amd64/kernel/drivers/wireless/
+depmod -a
+modprobe 8192eu
+lsmod | grep 81
+</pre>
+
+<p>I fiddled with the WIFI for a while and tried both network manager and  `wicd`, 
+which seemed to be the most useful tool and I managed to get connected to my home 
+WIFI once the device driver had been successfully registered </p>
+
+
+<pre>
+sudo apt install wicd
+wicd-client
+</pre>
+
+  
+<p> So here’s a picture of my final setup </p> 
+
+<figure>
+        <img src="../images/4.jpg" loading="lazy" alt="Mountain landscape" width="600" height="400">
+</figure>
+
+<p> I didn’t manage to get anything running on the movidius, 
+but I’ll pick that up with the next post </p>
+
+</body>
+</html>

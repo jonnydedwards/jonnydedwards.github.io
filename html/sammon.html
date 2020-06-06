@@ -1,0 +1,54 @@
+<html>
+<head>
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="https://latex.now.sh/style.css"> 
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" src="../js/sammon.js"></script>
+<script type="text/javascript" src="../js/jquery.js"></script>
+<style>
+canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 500px;
+    }
+</style>
+
+</head>
+<body id="top">
+  <header>
+    <h1>An Animated Sammon Map using Iris Data</h1>
+    <p class="author">Jonny Edwards  <br> May 2020</p>
+  </header>
+  
+<div class="abstract">
+  <h5>Abstract</h5>
+  <p>A visualisation of the optimisation process for Sammon Mapping</p>
+</div>
+
+<h1> Introduction </h1>
+
+<p> Multidimensional Scaling (MDS) is a method of embedding the distance
+information of a multi-variate data-set, in a reduced dimension \(L\), by
+seeking a set of vectors \( \{\mathbf{\hat{x}}\} ^n_{i=1} \in \mathbb{R} ^L \)
+that reproduce these distances. 
+The Stress measure \(S\) is represented by, </p>
+
+ $$ S_{sam} = \frac{1}{\sum _{i < j} d ^2 _{ij}} \sum _{ i < j} \frac{(d_{ij} - \hat{d} _{ij}) ^2}{d _{ij}}$$
+
+
+<p> which is again minimised, using a suitable gradient descent technique. </p>
+
+<p> Here's how the minimisation proceeds on the famous <em> Iris </em>  dataset: </p><br><br>
+
+<button type="button" onclick="start();">Run</button><br><br>
+
+<canvas id="canvas" width="400" height="300" style="border:1px solid #000000;"></canvas>
+
+</body>
+</html>
