@@ -1,0 +1,107 @@
+<html>
+<head>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="https://latex.now.sh/style.css"> 
+</head>
+
+<body id="top">
+  <header>
+    <h1>Sparseness and the What and Why of Fountain Codes</h1>
+    <p class="author">Jonny Edwards  <br> July 2020</p>
+  </header>
+  
+<div class="abstract">
+  <h5>Abstract</h5>
+  <p>A bluffers guide to fountain codes and the hidden trick which works so well.</p>
+</div>
+
+
+<p>
+Fountain codes are a fantastically simple coding scheme with world beating erasure channel 
+performance. Erasure channels are like packet channels, where if one (say video frame) 
+goes missing then you have to go back and get another to complete the set. Erasure channels, 
+as I see them, imply order, that is p1,p2,p3 need to be processed in that order and they are not 
+commutative.  
+This discussion focuses on one of the key “tricks” of the coding scheme, which is to use a seeded 
+random number generator to pass bounded information across the channel divide. The 
+interpretation of this material is from the last chapter in the Mackay Information Theory bible. 
+</p>
+<p>
+So what are fountain codes? As the name implies they are a coding scheme which can reconstitute 
+a 100% chunk based on any roughly 105% sample from a stream. So to reiterate that’s <em> any </em> 105%.  
+For instance this stream could be a broadcast to a car which whilst going through tunnels misses 
+some packets. However, eventually 105% arrives  and voila we have the movie for the kids in the 
+back!
+</p>
+
+<p>So how does the coding scheme work? We need a few things:</p>
+
+<ol>
+<li>A method of superimposing packet data to make a super packet</li>
+<li>A method of controlling how many packets are overlaid in a super packet</li>
+<li>A method of sending which packets and how many are in the super packet</li>
+<li>Finally a systematic method of decoding the super packet</li>
+</ol>
+
+<p>So ticking these off in order:</p>
+<ol>
+<li>Superimposing in a binary context is always done using XOR operations, this is like an addition 
+with the need to not worry about the carry.
+</li>
+<li>
+The soliton distribution - this is well explained in Mackay - it’s a distribution where you 
+control the number of packets that go into a super packet, ensuring that some super packets have 
+only 1 packet and just enough of these such that in a given random sample enough will be around 
+to aid the decoding process.
+</li>
+<li>
+This is the bit I like the most - by seeding and coordinating a random number generator you can 
+effectively communicate the number and id of packets in the super packets, across the stream. I like 
+this idea alot for a bunch of reasons, not least because it is a way of communicating order on top 
+of an unordered system. You’ll see why I’m interested in the discussion on my attempt at an 
+erasure code.
+</li>
+<li>
+The systematic method for decoding is easy to explain once you realise that some of the 
+super packets only contain one packet - so are trivially decoded. The trick then is to keep 
+removing the packets by XORing, each time exposing “one packet” super packets. This can be done 
+in a message passing way but is fairly simple to implement using understanding 
+from the above description about the nature of the distribution.
+</li>
+</ol>
+
+<p>Let’s look at how this plays out diagrammatically
+</p>
+
+<figure>
+    <img src="../images/fountain.png" loading="lazy" alt="Mountain landscape" width="500" height="300">
+</figure>
+
+<p>
+So why am I interested in this given I deal in temporal codes. Well, the main reason is that 
+I have a trivial method for doing at least 1 above using the sparse code generated in a 
+temporal unary code, my problem is (and this is where there is subtly in fountain codes)  
+I have to send all the position information unless I can somehow fix my pseudorandomness.
+</p>
+
+<figure>
+    <img src="../images/temporal.png" loading="lazy" alt="Mountain landscape" width="500" height="300">
+</figure>
+
+<p>
+So there isn’t really any trick involved in this - I simply unary code encode (as per Mackay’s 
+definition)  the value and multiplex incrementally in place. This approach is tremendously 
+efficient as it requires no iterative decoding and has a capacity to compress as well.
+</p>
+<p>
+The problem with sparsity is that when multiplexed one loses the concept of order, I’m not 
+sure the packet order is 1,6 or 6,1 so I need to encode the order somehow. I cant use the 
+pseudo random trick because the data imposes an order rather than in the case of the fountain 
+code the pseudorandomness imposing the order on the data. Effective sparsity straddling the 
+gap between sequential and parallel, with no need for order in a parallel context. The problem 
+of encoding order is nevertheless interesting, and something I’m looking into. 
+So in summary if you have data that is used sequentially then sparse coding won’t be as 
+effective fountain style coding, however if you are in the need of a commutative fountaion code then let's talk! 
+</p>
+</body>
+</html>

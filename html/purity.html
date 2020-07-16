@@ -1,0 +1,79 @@
+
+<html>
+<head>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="https://latex.now.sh/style.css"> 
+</head>
+
+<body id="top">
+  <header>
+    <h1>A Measure of Oscillator Purity for Computing with Time</h1>
+    <p class="author">Jonny Edwards  <br> July 2020</p>
+  </header>
+  
+
+<h1> Introduction </h1>
+<p>
+The purpose of this short abstract is to describe an initial measure (in a similar vein to <a href="">Yorks paper</a>) 
+for the suitability of a medium for computing using clocked oscillations. 
+We briefly review the scope for computing in this manner, using a temporally structured
+unary coding seen in my original paper. The key requirement for this approach
+is pure oscillation, which can be measured using entropy based spectral methods.
+</p>
+
+<h1> Simple Temporal Wave Operations </h1>
+<p>
+Temporal compute methods differ from traditional computation in that the substrate is time. In temporal arithmetic, addition is computed using a concatenation, but differs from the
+ digital implementation  described in my original temporal computing paper by using the native oscillation of the signal to clock the output.
+Multiplication is then the act of scaling the value against a base frequency. See Figure below for a 
+visual explanation. Since the primary substrate is time, the major factors in increasing the speed and accuracy  of computation are 
+the oscillator frequency and purity.
+</p>
+
+<figure>
+    <img src="../images/plot5.png" loading="lazy" alt="Mountain landscape" width="600" height="400">
+</figure>
+<!-- 
+\begin{figure}[h]
+    \centerline{\includegraphics[scale=0.31]{plot5.png}}
+    \caption{The addition of 2+3 in a temporal wave context, we use concatenation and re-parametrisation to perform
+    the arithmetic.}\label{fig:analog}
+    \end{figure} -->
+
+<p>    
+To measure clock correctness (clockness) we 
+perform a simple frequency analysis using the Fourier transform \( Z \int^ \infty _{-\infty} x(t)e^{-jwt}dt \in C\),
+examining the magnitude(a) (\(a = \sqrt(Re(x)^2+Im(x)^2)\)). For a single oscillation, this process gives the relative presence of
+that oscillation, which can be easily normalised by the total power of
+the spectrum (\(N(a_n) = a_n/\sum_i^{maxfreq}a_i\)).
+This transforms the spectrum into a probability mass function, which
+gives the probability of oscillation at a specific frequency. To turn
+this into a measure is then straightforward, we examine the entropy of
+the spectrum and <b>a perfect clock will have zero entropy</b>. The
+entropy is given by:
+</p>
+
+$$
+    H(X) = -\sum_{x\in X} p(x)\lg{p(x)}
+$$
+<p>
+This is often referred to as <em>spectral entropy</em>, but here we
+are using it specifically to characterise clocks.
+The figure below provides some simple examples.
+</p>
+
+
+<figure>
+    <img src="../images/clockness.png" loading="lazy" alt="Mountain landscape" width="600" height="400">
+</figure>
+
+<!-- \begin{figure}[h]
+    \centerline{\includegraphics[scale=0.20]{clockness.png}}
+    \caption{Some example functions assessed for their clockness, sample rate was 10000 points, with some approximation due to resolution}\label{fig:clockness}
+\end{figure} -->
+
+The above scheme is used to evaluate the specific clock property of an oscillating medium, to assess suitability of the medium to conduct temporally 
+organised compute.
+
+</body>
+</html>
