@@ -1,0 +1,95 @@
+<html>
+<head>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="https://latex.now.sh/style.css"> 
+</head>
+
+<body id="top">
+  <header>
+    <h1>VIZI-AI: part2</h1>
+    <p class="author">Jonny Edwards  <br> July 2020</p>
+  </header>
+  
+<div class="abstract">
+  <h5>Abstract</h5>
+  <p>Veni-VIZI-vici - I came, I saw, I didn't conquer</p>
+</div>
+
+<h1>Introduction</h1>
+
+<p>
+I've talked to the guys at <a = href="https://www.adlinktech.com/en/index">ADlink</a> a lot about the <a href=`'https://goto50.ai/2020/04/21/welcome-to-vizi-ai/'>VIZI-AI</a
+> device, I've often felt a bit
+at odds with the way they've approached things, and more generally the way I would
+approach using this device for machine vision. Let me first list why I'm interested,
+then let me describe what made me irk, and then let me conclude with suggestions
+for ways forward.
+</p>
+
+<h2> What's to like </h2>
+<p>
+I remember talking to Paul about the device at an <a href="https://iotnorth.uk">IOT North</a> meetup. I'd recently
+been to Nokia-Bell labs and they were messing around with small device in a surprisingly
+"hacker" way, to try and find what could and couldn't be done. The VIZI-AI immediately
+struck a chord, as I'd been interested in <a href="https://www.intel.com/content/www/us/en/products/processors/movidius-vpu.html">Movidius</a>,
+ and keen to see what happens in real
+terms, when you combine this in an integrated way, to an Single Board Computer (SBC). The rest of the board
+also offered some nice things - a reasonable quad core processor, 4GB of memory
+and enough USB, HDMI and RJ45 connections. And Linux.
+</p>
+    
+<h2> What other devices do</h2>
+<p>
+The platform on paper looked useful in situations where you would need a PIesque style
+device in a remote setting. I imagine competition would come from a PI+USB Movidius or 
+Nvidia Jetson 
+setup (something that <a href="https://folknology.wordpress.com">Al Wood</a> demonstrated at the <a href="https://abopen.com/news/oshcamp-2018-schedule-finalised-registration-open/">
+OSCCAMP18</a> ), many of the edge AI 
+community (like <a href="https://petewarden.com">Pete Warden</a> and my friend 
+Jag Mindus at <a href="https://sensingfeeling.io">Sensing Feeling</a>) focus on this as an 
+intermediate platform for distributed devices. In the UK this is often so that the
+inference is at data source, so no PII (Personally Identifying Information ie faces)
+leaves the device. Actually, I seem to remember Jag, having started with Jetsons, ended up 
+with unaccelerated boards, though they used a reasonably powerful Intel core.
+</p>
+
+<p> I guess this is all a bit mundane, you're not doing learning, you probably have 
+a bit of a cut down model, and you're probably interfacing with the outside world via
+some kind of API. Crucially, you might want reliability guarantees, which I think
+come with the VIZI-AI - despite the fact that the casing is "desktop" and doesn't remind
+me of the IP67 boxes I've used on some of my industrial jobs. </p>
+
+<h2> What's got me confused </h2> 
+<p>
+When I think of ML I immediately think Python,
+and I immediately want <a =href="https://www.anaconda.com/products/individual">Anaconda</a>, and for deep learning some kind of tensor library to handle
+all the GPU phaff. My only deviation
+is via <a href="https://pjreddie.com/darknet/">Darknet</a>  because it's nice C written by a cool guy with a definite hackers
+anti-corporate (yet state of the art) setup. I've had Darknet working in 30 minutes with 
+GPU acceleration, from the first <tt>git clone</tt>. I probably want to see the Python
+because I want to know what kind of voodoo is being done at each stage, so I can get 
+a handle on how this might be integrated into a larger system. I'm probably very old
+school, in fact I know I am, in the first job I took after studying I wrote my own
+TIFF reader, and I repeated this three times ... when I see a line in an image I think <a href="https://en.wikipedia.org/wiki/Hough_transform
+">Hough</a>. However, I think most ML developers <em> want to see code in Python</em>, 
+however "librarified".  Like me, most want to know this level of detail,
+ and most jobs <em> require </em>  this level of detail. That's what irked me, because 
+ to support this (and stuff like cameras) you need something like a PI UX, ideally not heavyweight but enough
+that you can hack a bit, and get stuff up and running. Again, that's my personal opinion
+and YMMV. Let's be clear, for self-powered ESP-EYE-style devices this doesn't apply,
+but once it's got a power supply and an OS I want to be on the box.  </p>
+
+<h2> Conclusion</h2>
+<p>
+So I got stuck with all the other stuff, my old and feeble brain got lost as it
+spent 10 minutes on a computer without opening a Jupyter notebook, my knee jerked,
+ my head span and I flailed with <tt>unrecognized device</tt> messages. I ended up on  github
+searching for "Darknet for Movidius" before admissions of failure. I so like this device
+but I'm guessing it doesn't like me - I'm too old-school in my  reliance
+on code rather than app. Adieu VIZI-AI.
+</p>   
+ 
+
+
+</body>
+</html>
