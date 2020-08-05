@@ -57,7 +57,7 @@ to aid the decoding process.
 <li>
 This is the bit I like the most - by seeding and coordinating a random number generator you can 
 effectively communicate the number and id of packets in the super packets, across the stream. I like 
-this idea a lot for a bunch of reasons, not least because it is a way of communicating order on top 
+this idea alot for a bunch of reasons, not least because it is a way of communicating order on top 
 of an unordered system. You’ll see why I’m interested in the discussion on my attempt at an 
 erasure code.
 </li>
@@ -90,8 +90,8 @@ temporal unary code, and I can use the order/distribution properties, to solve t
 <p>
 So there isn’t really any trick involved in this - I simply unary code encode (as per Mackay’s 
 definition)  the value and multiplex incrementally in place. I have two choices here, I adopt the 
-soliton distribution and the pseudo-randomness to help identify the position of the packets
-in the original stream or else I forget this and lose positional information.The latter 
+soliton distribution and the pseudorandomness to help identify the position of the packets
+in the original stream or else I forget this and lose poistional information.The latter 
 approach is tremendously efficient as it requires no iterative decoding and has a 
 capacity to compress as well but at the cost of losing positional information.
 </p>
@@ -102,7 +102,7 @@ the gap between sequential and parallel, with no need for order in a parallel co
 of encoding order is nevertheless interesting, and something I’m looking into. 
 So in summary if you have data that is used sequentially then sparse coding can be used in the place of XOR
 in an effective fountain style coding, however if you are in the need of a commutative 
-fountain code then sparsity is definitely worth exploring.! 
+fountaion code then sparsity is definitely worth exploring.! 
 </p>
 </body>
 </html>
