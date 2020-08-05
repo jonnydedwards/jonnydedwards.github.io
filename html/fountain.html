@@ -80,8 +80,7 @@ from the above description about the nature of the distribution.
 <p>
 So why am I interested in this given I deal in temporal codes. Well, the main reason is that 
 I have a trivial method for doing at least 1 above using the sparse code generated in a 
-temporal unary code, my problem is (and this is where there is subtly in fountain codes)  
-I have to send all the position information unless I can somehow fix my pseudorandomness.
+temporal unary code, and I can use the order/distribution properties, to solve the problem  
 </p>
 
 <figure>
@@ -90,18 +89,20 @@ I have to send all the position information unless I can somehow fix my pseudora
 
 <p>
 So there isn’t really any trick involved in this - I simply unary code encode (as per Mackay’s 
-definition)  the value and multiplex incrementally in place. This approach is tremendously 
-efficient as it requires no iterative decoding and has a capacity to compress as well.
+definition)  the value and multiplex incrementally in place. I have two choices here, I adopt the 
+soliton distribution and the pseudorandomness to help identify the position of the packets
+in the original stream or else I forget this and lose poistional information.The latter 
+approach is tremendously efficient as it requires no iterative decoding and has a 
+capacity to compress as well but at the cost of losing positional information.
 </p>
 <p>
-The problem with sparsity is that when multiplexed one loses the concept of order, I’m not 
-sure the packet order is 1,6 or 6,1 so I need to encode the order somehow. I cant use the 
-pseudo random trick because the data imposes an order rather than in the case of the fountain 
-code the pseudorandomness imposing the order on the data. Effective sparsity straddling the 
-gap between sequential and parallel, with no need for order in a parallel context. The problem 
+This highlights the  problem with sparsity,  when multiplexed one loses the concept of order, I’m not 
+sure the packet order is 1,6 or 6,1 so I need to encode the order somehow. Sparsity straddles 
+the gap between sequential and parallel, with no need for order in a parallel context. The problem 
 of encoding order is nevertheless interesting, and something I’m looking into. 
-So in summary if you have data that is used sequentially then sparse coding won’t be as 
-effective fountain style coding, however if you are in the need of a commutative fountaion code then let's talk! 
+So in summary if you have data that is used sequentially then sparse coding can be used in the place of XOR
+in an effective fountain style coding, however if you are in the need of a commutative 
+fountaion code then sparsity is definitely worth exploring.! 
 </p>
 </body>
 </html>
