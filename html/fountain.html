@@ -24,7 +24,7 @@ as I see them, imply order, that is p1,p2,p3 need to be processed in that order 
 commutative.  
 This discussion focuses on one of the key “tricks” of the coding scheme, which is to use a seeded 
 random number generator to pass bounded information across the channel divide. The 
-interpretation of this material is from the last chapter in the Mackay Information Theory bible. 
+interpretation of this material is from the last chapter in the Mackay Information Theory "bible". 
 </p>
 <p>
 So what are fountain codes? As the name implies they are a coding scheme which can reconstitute 
@@ -46,7 +46,7 @@ back!
 <p>So ticking these off in order:</p>
 <ol>
 <li>Superimposing in a binary context is always done using XOR operations, this is like an addition 
-with the need to not worry about the carry.
+without the needing to  worry about the carry.
 </li>
 <li>
 The soliton distribution - this is well explained in Mackay - it’s a distribution where you 
@@ -58,7 +58,7 @@ to aid the decoding process.
 This is the bit I like the most - by seeding and coordinating a random number generator you can 
 effectively communicate the number and id of packets in the super packets, across the stream. I like 
 this idea a lot for a bunch of reasons, not least because it is a way of communicating order on top 
-of an unordered system. You’ll see why I’m interested in the discussion on my attempt at an 
+of an unordered system. You’ll see why I’m interested in the discussion via my attempt at an 
 erasure code.
 </li>
 <li>
@@ -70,7 +70,7 @@ from the above description about the nature of the distribution.
 </li>
 </ol>
 
-<p>Let’s look at how this plays out diagrammatically
+<p>Let’s look at how this plays out diagrammatically:
 </p>
 
 <figure>
@@ -78,9 +78,9 @@ from the above description about the nature of the distribution.
 </figure>
 
 <p>
-So why am I interested in this given I deal in temporal codes. Well, the main reason is that 
+So why am I interested in this given I deal in temporal codes? Well, the main reason is that 
 I have a trivial method for doing at least 1 above using the sparse code generated in a 
-temporal unary code, and I can use the order/distribution properties, to solve the problem  
+temporal unary code, and I can use the order/distribution properties, to solve the problem:  
 </p>
 
 <figure>
@@ -91,7 +91,7 @@ temporal unary code, and I can use the order/distribution properties, to solve t
 So there isn’t really any trick involved in this - I simply unary code encode (as per Mackay’s 
 definition)  the value and multiplex incrementally in place. I have two choices here, I adopt the 
 soliton distribution and the pseudo-randomness to help identify the position of the packets
-in the original stream or else I forget this and lose positional information.The latter 
+in the original stream or else I forget this and lose positional information. The latter 
 approach is tremendously efficient as it requires no iterative decoding and has a 
 capacity to compress as well but at the cost of losing positional information.
 </p>
@@ -102,7 +102,7 @@ the gap between sequential and parallel, with no need for order in a parallel co
 of encoding order is nevertheless interesting, and something I’m looking into. 
 So in summary if you have data that is used sequentially then sparse coding can be used in the place of XOR
 in an effective fountain style coding, however if you are in the need of a commutative 
-fountain code then sparsity is definitely worth exploring.! 
+fountain code then sparsity is definitely worth exploring! 
 </p>
 </body>
 </html>
